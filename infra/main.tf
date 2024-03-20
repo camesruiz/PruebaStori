@@ -60,3 +60,13 @@ resource "aws_iam_role_policy_attachment" "s3_access_attachment" {
   role       = aws_iam_role.s3_role.name
   policy_arn = aws_iam_policy.s3_policy.arn
 }
+
+# lambda function
+resource "aws_lambda_function" "lambda-function" {
+  function_name = "thumbnail_gen"
+  role          = aws_iam_role.s3_role.arn
+  s3_bucket     = aws_s3_bucket.lambda-bucket.bucket
+  s3_key        = "lambda_function.zip"
+  handler       = "main.lambda.handler"
+  runtime       = "python3.8"
+}
