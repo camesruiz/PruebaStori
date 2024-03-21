@@ -46,7 +46,7 @@ jobs:
             pip install --platform manylinux2014_x86_64 --target=package --implementation cp --only-binary=:all: --upgrade pillow boto3
             zip -r ../lambda_func/lambda_function.zip .
             cd ..
-            zip -j lambda_func/lambda_function.zip lambda_function/main.py
+            zip -j lambda_func/lambda_function.zip lambda_function/lambda_function.py
       - run:
           name: Dir
           command: |

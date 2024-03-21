@@ -7,7 +7,7 @@ import random
 parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.append(parent_dir)
 
-from lambda_function.main import image_resizer, lambda_handler
+from lambda_function.lambda_function import image_resizer, lambda_handler
 
 
 class TestImageResizer(unittest.TestCase):
