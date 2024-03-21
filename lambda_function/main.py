@@ -31,7 +31,7 @@ def lambda_handler(event, context):
 
         # Create thumbnail
         image_resizer(filename, thumb_path)
-        s3.upload_file(thumb_path, destination_bucket, thumb_path")
+        s3.upload_file(thumb_path, destination_bucket, thumb_path)
 
         return {
             'statusCode': 200,
