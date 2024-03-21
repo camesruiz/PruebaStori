@@ -34,11 +34,6 @@ jobs:
       - attach_workspace:
           at: ~/project
       - run:
-          name: Dir
-          command: |
-            echo "$PWD"
-            ls
-      - run:
           name: Install AWS CLI
           command: |
             pip install awscli       
@@ -51,6 +46,11 @@ jobs:
             zip -r ../lambda_function.zip .
             cd ..
             zip -j lambda_function.zip lambda_function/main.py
+      - run:
+          name: Dir
+          command: |
+            echo "$PWD"
+            ls
       - run:
           name: Deploy Lambda function
           command: |
