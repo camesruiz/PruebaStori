@@ -57,7 +57,7 @@ jobs:
             export AWS_ACCESS_KEY_ID="$AWS_ACCESS_KEY"
             export AWS_SECRET_ACCESS_KEY="$AWS_ACCESS_SECRET"
             export AWS_DEFAULT_REGION="$AWS_REGION_NAME"
-            aws s3 sync lambda_package.zip s3://stori-lambda-artifacts
+            aws s3 sync lambda_function.zip s3://stori-lambda-artifacts
             aws lambda update-function-code --function-name "thumbnail_gen" --s3-bucket "stori-lambda-artifacts" --s3-key "lambda_function.zip"
 
 workflows:
