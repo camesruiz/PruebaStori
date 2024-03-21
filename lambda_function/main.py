@@ -1,5 +1,6 @@
 import boto3
 from PIL import Image
+import random
 
 s3 = boto3.client('s3')
 
@@ -20,17 +21,19 @@ def lambda_handler(event, context):
     key = event['Records'][0]['s3']['object']['key']
 
     try:
-        # Download image from S3
         filename = key.split("/")[-1]
-        thumb_path = f'{filename.split(".")[0]}_thumb.jpg'
+        thumb_path = f'{filename.split(".")[0]}_thumb_{random.randint(1000, 9999)}.jpg'
 
+        # Download image from S3
         s3.download_file(bucket, key, filename)
+
+        # Create thumbnail
         image_resizer(filename, thumb_path)
         s3.upload_file(thumb_path, bucket, f"resized/{thumb_path}")
 
         return {
             'statusCode': 200,
-            'body': 'Image resized and uploaded successfully'
+            'body': 'Thumbnail generated successfully'
         }
     except Exception as e:
         return {
