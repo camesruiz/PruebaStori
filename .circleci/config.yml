@@ -1,0 +1,58 @@
+version: 2.1
+orbs:
+  python: circleci/python@2.1.1
+  aws-cli: circleci/aws-cli@2.0.6
+
+jobs:
+  build_and_test:
+    executor:
+      name: python/default
+      tag: "3.8"
+    steps:
+      - aws-cli/setup:
+          aws-access-key-id: AWS_ACCESS_KEY
+          aws-secret-access-key: AWS_ACCESS_SECRET
+          aws-region: AWS_REGION_NAME
+      - checkout
+      - run:
+          name: Install packages
+          command: |
+            pip install boto3
+            pip install pillow
+            pip install \
+            --platform manylinux2014_x86_64 \
+            --target=package \
+            --implementation cp \
+            --only-binary=:all: --upgrade \
+            pillow boto3
+      - run:
+          name: Run tests
+          command: python -m unittest
+
+  deploy: 
+    executor:
+      name: python/default
+      tag: "3.8"
+    steps:
+      - run:
+          name: Zip Lambda function
+          command: |
+            mkdir lambda_artifacts
+            zip -r lambda_function.zip lambda_artifacts/lambda_function.zip lambda_function/main.py
+
+      - run:
+          name: Deploy Lambda function
+          command: |
+            aws s3 sync ./lambda_artifacts s3://stori-lambda-artifacts
+            aws lambda update-function-code --function-name "thumbnail_gen" --s3-bucket "stori-lambda-artifacts"
+
+workflows:
+  test_my_app:
+    jobs:
+      - build_and_test
+      - deploy:
+          requires:
+            - build_and_test # only deploy if the build_and_test job has completed
+          filters:
+            branches:
+              only: main # only deploy when on main
