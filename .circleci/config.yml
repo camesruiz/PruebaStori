@@ -40,7 +40,8 @@ jobs:
       - run:
           name: Zip Lambda function
           command: |
-            mkdir lambda_artifacts,lambda_func
+            mkdir lambda_func
+            mkdir lambda_artifacts
             cd lambda_artifacts
             pip install --platform manylinux2014_x86_64 --target=package --implementation cp --only-binary=:all: --upgrade pillow boto3
             zip -r ../lambda_func/lambda_function.zip .
