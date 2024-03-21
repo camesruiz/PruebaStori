@@ -49,6 +49,7 @@ jobs:
             cd lambda_artifacts
             pip install \
             --platform manylinux2014_x86_64 \
+            --python-version 3.8 \ 
             --target=package \
             --implementation cp \
             --only-binary=:all: --upgrade \
