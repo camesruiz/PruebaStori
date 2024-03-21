@@ -23,7 +23,7 @@ def lambda_handler(event, context):
     destination_bucket = "camesruiz-stori-thumbnails"
 
     try:
-        filename = key.split('/')[-1]
+        filename = f"/tmp/{key.split('/')[-1]}"
         thumb_path = f"{filename.split('.')[0]}_thumb_{random.randint(1000, 9999)}.jpg"
 
         # Download image from S3
@@ -31,7 +31,7 @@ def lambda_handler(event, context):
 
         # Create thumbnail
         image_resizer(filename, thumb_path)
-        s3.upload_file(f"/tmp/{thumb_path}", destination_bucket, thumb_path)
+        s3.upload_file(thumb_path, destination_bucket, thumb_path)
 
         return {
             'statusCode': 200,
