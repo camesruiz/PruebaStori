@@ -19,12 +19,6 @@ jobs:
           command: |
             pip install boto3
             pip install pillow
-            pip install \
-            --platform manylinux2014_x86_64 \
-            --target=package \
-            --implementation cp \
-            --only-binary=:all: --upgrade \
-            pillow boto3
       - run:
           name: Run tests
           command: python -m unittest
@@ -52,7 +46,16 @@ jobs:
           name: Zip Lambda function
           command: |
             mkdir lambda_artifacts
-            zip -r lambda_artifacts/lambda_function.zip lambda_function/main.py
+            cd lambda_artifacts
+            pip install \
+            --platform manylinux2014_x86_64 \
+            --target=package \
+            --implementation cp \
+            --only-binary=:all: --upgrade \
+            pillow boto3
+            zip -r ../lambda_package.zip .
+            cd ..
+            zip -r lambda_package.zip lambda_function/main.py
       - run:
           name: Deploy Lambda function
           command: |
@@ -60,7 +63,7 @@ jobs:
             export AWS_SECRET_ACCESS_KEY="$AWS_ACCESS_SECRET"
             export AWS_DEFAULT_REGION="$AWS_REGION_NAME"
             aws s3 sync ./lambda_artifacts s3://stori-lambda-artifacts
-            aws lambda update-function-code --function-name "thumbnail_gen" --s3-bucket "stori-lambda-artifacts" --s3-key "lambda_function.zip"
+            aws lambda update-function-code --function-name "thumbnail_gen" --s3-bucket "stori-lambda-artifacts" --s3-key "lambda_package.zip"
 
 workflows:
   test_my_app:
