@@ -10,6 +10,7 @@ infrastructure setting, Circle CI for the deploying process.
 
 ## Project Overview
 
+```
 PruebaStori
 ├── infra               # Terraform files
 │   ├── main.tf
@@ -20,4 +21,4 @@ PruebaStori
 │   ├── test_main.py
 ├── .gitignore
 └── README.md
-
+```
