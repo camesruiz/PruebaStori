@@ -1,14 +1,9 @@
 import unittest
 from unittest.mock import MagicMock, patch
-from PIL import Image
-import boto3
-import io
 import os
 import sys
-import tempfile
 import random
 
-# Add the parent directory of the 'function' folder to the Python path
 parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.append(parent_dir)
 
