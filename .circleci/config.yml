@@ -47,12 +47,7 @@ jobs:
           command: |
             mkdir lambda_artifacts
             cd lambda_artifacts
-            pip install \
-            --platform manylinux2014_x86_64 \
-            --target=package \
-            --implementation cp \
-            --only-binary=:all: --upgrade \            
-            pillow boto3
+            pip install --platform manylinux2014_x86_64 --target=package --implementation cp --only-binary=:all: --upgrade pillow boto3
             zip -r ../lambda_function.zip .
             cd ..
             zip -j lambda_function.zip lambda_function/main.py
