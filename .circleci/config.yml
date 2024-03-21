@@ -15,10 +15,6 @@ jobs:
           aws-region: AWS_REGION_NAME
       - checkout
       - run:
-          name: Dir
-          command: |
-            ls
-      - run:
           name: Install packages
           command: |
             pip install boto3
@@ -38,6 +34,10 @@ jobs:
       name: python/default
       tag: "3.8"
     steps:
+      - run:
+          name: Dir
+          command: |
+            ls
       - run:
           name: Zip Lambda function
           command: |
