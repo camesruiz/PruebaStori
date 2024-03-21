@@ -28,16 +28,22 @@ jobs:
       - run:
           name: Run tests
           command: python -m unittest
-
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - .
   deploy: 
     executor:
       name: python/default
       tag: "3.8"
     steps:
+      - attach_workspace:
+          at: ~/project
       - run:
           name: Dir
           command: |
             echo "$PWD"
+            ls
       - run:
           name: Zip Lambda function
           command: |
