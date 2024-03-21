@@ -37,7 +37,7 @@ jobs:
       - run:
           name: Dir
           command: |
-            ls
+            echo "$PWD"
       - run:
           name: Zip Lambda function
           command: |
