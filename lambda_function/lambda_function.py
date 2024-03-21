@@ -27,7 +27,7 @@ def lambda_handler(event, context):
         thumb_path = f"{filename.split('.')[0]}_thumb_{random.randint(1000, 9999)}.jpg"
 
         # Download image from S3
-        s3.download_file(bucket, key, f"/tmp/{filename}")
+        s3.download_file(bucket, key, filename)
 
         # Create thumbnail
         image_resizer(filename, thumb_path)
