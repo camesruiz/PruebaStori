@@ -15,7 +15,7 @@ PruebaStori
 │   ├── main.tf
 ├── lambda_function     # Lambda source code
 │   ├── main.py
-├── test                #unit testing functions
+├── test                # Unit testing functions
 │   ├── __init__.py
 │   ├── test_main.py
 ├── .gitignore
