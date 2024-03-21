@@ -17,7 +17,7 @@ jobs:
       - run:
           name: Dir
           command: |
-            echo ls
+            ls
       - run:
           name: Install packages
           command: |
