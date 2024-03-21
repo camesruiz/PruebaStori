@@ -17,7 +17,7 @@ jobs:
       - run:
           name: Install packages
           command: |
-            sudo pip install \
+            pip install \
             --platform manylinux2014_x86_64 \
             --target=package \
             --implementation cp \
