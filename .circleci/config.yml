@@ -45,11 +45,14 @@ jobs:
             echo "$PWD"
             ls
       - run:
+          name: Install AWS CLI
+          command: |
+            pip install awscli       
+      - run:
           name: Zip Lambda function
           command: |
             mkdir lambda_artifacts
             zip -r lambda_artifacts/lambda_function.zip lambda_function/main.py
-
       - run:
           name: Deploy Lambda function
           command: |
