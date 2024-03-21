@@ -7,3 +7,6 @@
 
 # idea files
 *.idea
+
+# test
+**/test/__pycache__/*
