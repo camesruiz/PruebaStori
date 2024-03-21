@@ -17,7 +17,6 @@ resource "aws_s3_object" "origin-folder" {
     key    = "original/"
 }
 
-
 resource "aws_s3_bucket" "lambda-bucket" {
     bucket = "stori-lambda-artifacts"
 }
@@ -67,6 +66,6 @@ resource "aws_lambda_function" "lambda-function" {
   role          = aws_iam_role.s3_role.arn
   s3_bucket     = aws_s3_bucket.lambda-bucket.bucket
   s3_key        = "lambda_function.zip"
-  handler       = "main.lambda.handler"
+  handler       = "lambda_function.lambda_handler"
   runtime       = "python3.8"
 }

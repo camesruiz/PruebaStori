@@ -1,5 +1,5 @@
 import boto3
-from PIL import Image
+from package.PIL import Image
 import random
 
 s3 = boto3.client('s3')
