@@ -51,8 +51,9 @@ jobs:
             --platform manylinux2014_x86_64 \
             --target=package \
             --implementation cp \
-            --python-version 3.8 \ 
-            --only-binary=:all: --upgrade \
+            --only-binary=:all:\
+            --python-version 3.8 \
+            --upgrade \            
             pillow boto3
             zip -r ../lambda_function.zip .
             cd ..
