@@ -35,6 +35,10 @@ jobs:
       tag: "3.8"
     steps:
       - run:
+          name: Dir
+          command: |
+            ls
+      - run:
           name: Zip Lambda function
           command: |
             mkdir lambda_artifacts
