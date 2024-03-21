@@ -7,13 +7,13 @@ import random
 parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.append(parent_dir)
 
-from lambda_function.main import image_resizer, lambda_handler
+from lambda_function.lambda_function import image_resizer, lambda_handler
 
 
 class TestImageResizer(unittest.TestCase):
 
-    @patch('lambda_function.main.s3')
-    @patch('lambda_function.main.Image')
+    @patch('lambda_function.lambda_function.s3')
+    @patch('lambda_function.lambda_function.Image')
     def test_image_resizer(self, mock_Image, mock_s3):
         mock_img = MagicMock()
         mock_img.thumbnail.return_value = None
@@ -21,14 +21,14 @@ class TestImageResizer(unittest.TestCase):
         mock_Image_open = MagicMock(return_value=mock_img)
 
         # Mock the PIL Image.open function
-        with patch('lambda_function.main.Image.open', mock_Image_open):
+        with patch('lambda_function.lambda_function.Image.open', mock_Image_open):
             image_resizer('test/test_image.jpg', 'test_thumb.jpg')
 
         mock_Image.open('test_image.jpg')
         mock_img.thumbnail((100, 100))
         mock_img.save('test_thumb.jpg')
 
-    @patch('lambda_function.main.boto3')
+    @patch('lambda_function.lambda_function.boto3')
     def test_lambda_handler(self, mock_boto3):
         # Mock S3 client
         mock_s3 = MagicMock()
