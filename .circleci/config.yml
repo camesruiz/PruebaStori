@@ -38,7 +38,7 @@ jobs:
           name: Zip Lambda function
           command: |
             mkdir lambda_artifacts
-            zip -r lambda_function.zip lambda_artifacts/lambda_function.zip lambda_function/main.py
+            zip -r lambda_artifacts/lambda_function.zip lambda_function/main.py
 
       - run:
           name: Deploy Lambda function
