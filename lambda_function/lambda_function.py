@@ -23,8 +23,8 @@ def lambda_handler(event, context):
     destination_bucket = "camesruiz-stori-thumbnails"
 
     try:
-        filename = key.split("/")[-1]
-        thumb_path = f'{filename.split(".")[0]}_thumb_{random.randint(1000, 9999)}.jpg'
+        filename = f"/tmp/{key.split('/')[-1]}"
+        thumb_path = f"/tmp/{filename.split('.')[0]}_thumb_{random.randint(1000, 9999)}.jpg"
 
         # Download image from S3
         s3.download_file(bucket, key, filename)
