@@ -20,6 +20,8 @@ def lambda_handler(event, context):
     bucket = event['Records'][0]['s3']['bucket']['name']
     key = event['Records'][0]['s3']['object']['key']
 
+    destination_bucket = "camesruiz-stori-thumbnails"
+
     try:
         filename = key.split("/")[-1]
         thumb_path = f'{filename.split(".")[0]}_thumb_{random.randint(1000, 9999)}.jpg'
@@ -29,7 +31,7 @@ def lambda_handler(event, context):
 
         # Create thumbnail
         image_resizer(filename, thumb_path)
-        s3.upload_file(thumb_path, bucket, f"resized/{thumb_path}")
+        s3.upload_file(thumb_path, destination_bucket, thumb_path")
 
         return {
             'statusCode': 200,

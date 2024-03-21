@@ -8,15 +8,15 @@ resource "aws_s3_bucket" "images-bucket" {
     bucket = "camesruiz-stori-images"
 }
 
+resource "aws_s3_bucket" "thumbnails-bucket" {
+    bucket = "camesruiz-stori-thumbnails"
+}
+
 resource "aws_s3_object" "origin-folder" {
     bucket = "${aws_s3_bucket.images-bucket.id}"
     key    = "original/"
 }
 
-resource "aws_s3_object" "destination-folder" {
-    bucket = "${aws_s3_bucket.images-bucket.id}"
-    key    = "resized/"
-}
 
 resource "aws_s3_bucket" "lambda-bucket" {
     bucket = "stori-lambda-artifacts"

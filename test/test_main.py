@@ -55,7 +55,7 @@ class TestImageResizer(unittest.TestCase):
 
         mock_s3.download_file('test-bucket', 'test_image.jpg', 'test_image.jpg')
         image_resizer('test/test_image.jpg', expected_thumb_path)
-        mock_s3.upload_file(expected_thumb_path, 'test-bucket', 'resized/test_image_thumb_3761.jpg')
+        mock_s3.upload_file(expected_thumb_path, 'test-bucket', 'test_image_thumb_3761.jpg')
 
 
 if __name__ == '__main__':
