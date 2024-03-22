@@ -55,7 +55,7 @@ Deployment is made through a CI/CD pipeline using CircleCI
 
 ## Strengths and Weaknesses
 
-- Code working on a serverless mode
+- Code working on a serverless mode avoiding the need of provisioning servers
 - Easy to integrate to an external service (e.g. Web service) using the API
 - Infrastructure well documented using Terraform, making it easy to manage, version and replicate
 - Automated deployment and testing enhancing de developing experience
